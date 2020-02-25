@@ -1,9 +1,9 @@
 import React from 'react';
-import Loading from "./Loading";
+import Loading from "./js/components/Loader/Loading";
 import { Alert } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import Weather from "./Weather";
+import Weather from "./js/components/View/Weather";
 import Axios from 'axios';
 
 const API_KEY = '6baaf1fd281dae1f110c586c594e832e';
@@ -40,16 +40,12 @@ export default class App extends React.Component {
     try {
         await Permissions.askAsync(Permissions.LOCATION);
 
-        // const location = await Location.getCurrentPositionAsync({});
-        // console.log(location);
-
         const {
           coords: {latitude, longitude}
         } = await Location.getCurrentPositionAsync({});
         
         // 위치 정보로 날씨 데이터를 획득
         this._getWeather(latitude, longitude);
-        // this.setState({ isLoading: false });
     } catch (error) {
         Alert.alert("위치 정보를 확인할 수 없습니다.");
     }
@@ -67,8 +63,11 @@ export default class App extends React.Component {
     return isLoading ? <Loading /> : null; 
   }  */
   render() {
-    return (
+    /* return (
           this.state.isLoading ? <Loading /> : <Weather data={this.state.weather} />
+    ); */
+    return (
+      <Loading />
     );
   }
 }
